@@ -1,9 +1,19 @@
-dico = {"1": ".----", "2": "..---", "3": "...--", "4": "....-", "5": ".....", "6": "-....", "7": "--...", "8": "---..",
-        "9": "----.", "0": "-----", "A": ".-", "B": "-...", "C": "-.-.", "D": "-..", "E": ".", "F": "..-.", "G": "--.",
-        "H": "....", "I": "..", "J": ".---", "K": "-.-", "L": ".-..", "M": "--", "N": "-.", "O": "---", "P": ".--.",
-        "Q": "--.-", "R": ".-.", "S": "...", "T": "-", "U": "..-", "V": "...-", "W": ".--", "X": "-..-", "Y": "-.--",
-        "Z": "--..", "À": ".--.-", "Â": ".--.-", "Æ": ".-.-", "Ç": "-.-..", "È": ".-..-", "Ë": "..-..", "É": "..-..",
-        "Ê": "-..-.", "Î": "..", "Ï": "-..--", "Ô": "---.", "Ü": "..--", "Û": "..--", ",": "--..--", " ": "  "}
+NUMS = {"1": ".____", "2": "..___", "3": "...__", "4": "...._", "5": ".....", "6": "_....", "7": "__...", "8": "___..",
+        "9": "____.", "0": "_____"}
+ALPHAS = {"A": "._", "Ã": "._._", "À": ".__._", "B": "_...", "C": "_._.", "D": "_..", "E": ".", "É": "..-..",
+          "F": ".._.", "G": "__.", "H": "....", "I": "..", "J": ".___", "K": "_._", "L": "._..", "M": "__", "N": "_.",
+          "O": "___", "P": ".__.", "Q": "__._", "R": "._.", "S": "...", "T": "_", "U": ".._", "V": "..._", "W": ".__",
+          "X": "_.._", "Y": "_.__", "Z": "__.."}
+PONCTUATIONS = {".": "._._._", ",": "__..__", ":": "___...", "?": "..__..", "¿": "..-.-", "!": "_._.__", "¡": "--...-",
+                "-": "_...._", "=": "-...-", " ": " / ", "+": ".-.-.", "(": "-.--.-", ")": "-.--.-"}
+SPECIALS = {"À": ALPHAS["A"], "Ä": ALPHAS["A"], "Â": ALPHAS["A"], "Ë": ALPHAS["E"], "Ê": ALPHAS["E"], "È": ALPHAS["E"],
+            "Ẽ": ALPHAS["E"], "Ñ": "__.__", "Ö": "___.", "Ü": "..__"}
+
+dico = {}
+dico.update(NUMS)
+dico.update(ALPHAS)
+dico.update(PONCTUATIONS)
+dico.update(SPECIALS)
 
 
 def encode():
@@ -22,18 +32,29 @@ def decode():
     words = morse.split("  ")
     for word in words:
         letters = word.split(" ")
-        for letter in letters:
-            for key in dico.keys():
-                if letter == dico[key]:
 
 
-encode_or_decode = input("1. To encode | 2. To decode : ")
+def learn():
+    print("Ici, apprenez les caractères morse")
+    print("**********************************\n")
+    print("Pour aller plus loin, vous pouvez aller à cette ressource : "
+          "https://j28ro.blogspot.com/p/lecons-dapprentissage-du-morse-methode.html")
 
 
-if encode_or_decode == "1":
-    encode()
-elif encode_or_decode == "2":
-    decode()
-else:
-    print("Veuillez taper 1 pour encoder ou 2 pour décoder")
+def main():
+    menu_response = input("1. To encode | 2. To decode | ?. To learn | 0. Pour quitter: ")
+    if menu_response == "0":
+        exit()
+    elif menu_response == "1":
+        encode()
+    elif menu_response == "2":
+        decode()
+    elif menu_response == "?":
+        learn()
+    else:
+        print("Suivez les instructions svp.\n")
+        main()
 
+
+if __name__ == '__main__':
+    main()
