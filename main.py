@@ -1,3 +1,5 @@
+from time import sleep
+
 NUMS = {"1": ".____", "2": "..___", "3": "...__", "4": "...._", "5": ".....", "6": "_....", "7": "__...", "8": "___..",
         "9": "____.", "0": "_____"}
 ALPHAS = {"A": "._", "Ã": "._._", "À": ".__._", "B": "_...", "C": "_._.", "D": "_..", "E": ".", "É": "..-..",
@@ -5,7 +7,7 @@ ALPHAS = {"A": "._", "Ã": "._._", "À": ".__._", "B": "_...", "C": "_._.", "D":
           "O": "___", "P": ".__.", "Q": "__._", "R": "._.", "S": "...", "T": "_", "U": ".._", "V": "..._", "W": ".__",
           "X": "_.._", "Y": "_.__", "Z": "__.."}
 PONCTUATIONS = {".": "._._._", ",": "__..__", ":": "___...", "?": "..__..", "¿": "..-.-", "!": "_._.__", "¡": "--...-",
-                "-": "_...._", "=": "-...-", " ": " / ", "+": ".-.-.", "(": "-.--.-", ")": "-.--.-"}
+                "-": "_...._", "=": "-...-", " ": "/", "+": ".-.-.", "(": "-.--.-", ")": "-.--.-", "'": " "}
 SPECIALS = {"À": ALPHAS["A"], "Ä": ALPHAS["A"], "Â": ALPHAS["A"], "Ë": ALPHAS["E"], "Ê": ALPHAS["E"], "È": ALPHAS["E"],
             "Ẽ": ALPHAS["E"], "Ñ": "__.__", "Ö": "___.", "Ü": "..__"}
 
@@ -25,13 +27,26 @@ def encode():
         morse.append(letter)
     morse = " ".join(morse)
     print(morse)
+    sleep(5)
+    do_u_main()
 
 
 def decode():
     morse = input("Entrez le morse : ")
     words = morse.split("  ")
+    i = 0
+    sentence = []
     for word in words:
         letters = word.split(" ")
+        for a in range(len(letters)):
+            key = [k for k, v in dico.items() if v == letters[a]]
+            if len(key) > 0:
+                sentence.append(key[0])
+        i += 1
+    sentence = "".join(sentence)
+    print(sentence)
+    sleep(5)
+    do_u_main()
 
 
 def learn():
@@ -39,6 +54,19 @@ def learn():
     print("**********************************\n")
     print("Pour aller plus loin, vous pouvez aller à cette ressource : "
           "https://j28ro.blogspot.com/p/lecons-dapprentissage-du-morse-methode.html")
+
+
+def do_u_main():
+    a = input("Voulez vous effectuer d'autres actions ? [y/n] : ")
+    if a == "y":
+        main()
+    else:
+        b = input("Sortir ? [y/n] : ")
+        if b == "n":
+            main()
+        else:
+            print("Au revoir :)")
+            exit()
 
 
 def main():
