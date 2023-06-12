@@ -11,11 +11,7 @@ PONCTUATIONS = {".": "._._._", ",": "__..__", ":": "___...", "?": "..__..", "¿"
 SPECIALS = {"À": ALPHAS["A"], "Ä": ALPHAS["A"], "Â": ALPHAS["A"], "Ë": ALPHAS["E"], "Ê": ALPHAS["E"], "È": ALPHAS["E"],
             "Ẽ": ALPHAS["E"], "Ñ": "__.__", "Ö": "___.", "Ü": "..__"}
 
-dico = {}
-dico.update(NUMS)
-dico.update(ALPHAS)
-dico.update(PONCTUATIONS)
-dico.update(SPECIALS)
+dico = NUMS | ALPHAS | PONCTUATIONS | SPECIALS
 
 
 def encode():
@@ -34,15 +30,12 @@ def encode():
 def decode():
     morse = input("Entrez le morse : ")
     words = morse.split("  ")
-    i = 0
     sentence = []
     for word in words:
         letters = word.split(" ")
         for a in range(len(letters)):
-            key = [k for k, v in dico.items() if v == letters[a]]
-            if len(key) > 0:
+            if key := [k for k, v in dico.items() if v == letters[a]]:
                 sentence.append(key[0])
-        i += 1
     sentence = "".join(sentence)
     print(sentence)
     sleep(5)
